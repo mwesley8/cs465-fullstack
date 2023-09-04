@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Dive Sites - Bhaccasyoniztas Beach Resort Website Template</title>
+	<title>{{title}}</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
@@ -16,7 +16,7 @@
 						<div class="body">
 							<h1>Travel</h1>
 							<ul id="sites">
-								{{#each}}
+								{{#each trips}}
 								<li>
 									<a href=“travel.html"><img src="images/{{ this.image}}" alt="Img"></a>
 									<h2><a href=“travel.html">{{ this.name}}</a></h2>

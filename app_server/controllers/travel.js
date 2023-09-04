@@ -8,7 +8,10 @@ var trips = JSON.parse(fs.readFileSync('./data/trips.json', 'utf8'));
 /* Get travel view */
 // Pass the parsed information to the view
 const travel = (req, res) => {
-    res.render('travel', { title: 'Travlr Getaways', trips});
+    // Looks at the node process that is running and the environmental
+    // variables in it. 
+    pageTitle = process.env.npm_package_description + ' - Travel';
+    res.render('travel', { title: pageTitle, trips});
 };
 
 module.exports = {
