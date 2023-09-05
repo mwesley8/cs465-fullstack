@@ -6,10 +6,14 @@ const readLine = require('readline');
 //mongoose.set('useUnifiedTopology', true);
 const connect = () => {
   setTimeout(() => mongoose.connect(dbURI, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    serverSelectionTimeoutMS: 5000,
+    // Not supported 
     //useCreateIndex: true
-  }), 1000);
-}
+  },).then((res) => {
+    console.log("Database Connected");
+  }).catch(error => {console.log(error);
+}))};
 
 //if (process.env.NODE_ENV === 'production') {
 //  dbURI = process.env.MONGODB_URI;
@@ -52,6 +56,8 @@ process.on('SIGTERM', () => {
   });
 });
 
-//connect();
+// Opening the connection removed the schema is not registered
+connect();
 
 require('./travlr');
+

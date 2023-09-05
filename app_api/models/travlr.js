@@ -13,5 +13,6 @@ const TripSchema = new mongoose.Schema({
     image:       { type: String, required: true },
     description: { type: String, required: true }
 });
-//TripSchema.path('_id');
+
+
 mongoose.model('trips', TripSchema);
