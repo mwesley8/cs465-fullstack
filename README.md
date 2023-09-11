@@ -1,6 +1,6 @@
 # cs465-fullstack
 CS-465 Full Stack Development with MEAN
-<h3>Module One: Create Website</h3>h3>
+<h3>Module One: Create Website</h3>
 After reviewing the assignments and final project, I am excited to learn the MEAN stack and explore the aspects of full stack development. The module one section required us into install the tech stack required for the class. I navigated to each download section to install the software. MongoDB wanted me to install Mongo Compass as the graphical IDE. I do not know if I can use Mongo Compass instead of Robo.
 I ran statements in PowerShell to check the Node.js, Node Package Manager, and GIT version. I opened a web browser and went to my git hub page. I created a new repository called traveler. I click on the down arrow to retrieve the GitHub http address. Then I created a clone of the traveler repository in PowerShell.
 I check the status of git in PowerShell and then created a new branch called module one. I was instructed to never work on the main branch. After creating a branch, I install express generator. Express is an API that is use to create web applications. After the install, I could see number files that were added to my repository.
