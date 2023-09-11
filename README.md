@@ -41,3 +41,50 @@ Next, I ran git push to push the files to the repository. There is an error beca
 git push --set-upstream origin module_1
 
 Creating a new branch and uploading changes have become second nature and I am looking forward to exploring MEAN full stack development.
+
+Module 2
+
+The purpose of this section is to refactor a Node.js web application containing static HTML into a proper backend application that uses the MVC architecture. The picture below shows the before and after file structure of the express web application.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/eed5cd3b-ce4f-4335-bb24-e7b55fab9db4)
+
+Create Web Application Folders
+
+Starting with opening up the PowerShell window, switch to the web site directory. Issue the dir command or git status to check the branch. Best practices recommend the application running on the app server instead of the top level directory.
+
+npm install nodemon
+
+The instructions do not show how to install a global installation. To perform a local instance, add the following code to the packages.json file.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/64318f60-fc28-4985-939f-607fbc0cb29d)
+
+In PowerShell, to start Node Mon, type: npm run serve
+
+In Visual Studio Code, create a new folder named app_server. Move the current view and routes folders in app_server. Make sure that app_server is selected when dragging and dropping the folders.
+
+Make a new branch by running the command git checkout -b module_2. The same files and folders are in the new branch. Everything is still the same. NPM has a package called Node mod that makes updating file easier.
+
+Create Controller and Routers
+
+Select the app_server folder and click on add folder. Name the newly created folder ‘controllers’. Inside the controllers folder, create a new file called ‘main.js’.
+
+Typing code . will open up VS code in the current folder. You can work with git commands right in the editor. Create a new top-level folder called app_server. This will be the application code for the backend server. Git will keep track of the changes. Under the app_server folder, I created another folder name controller. Inside the controller folder, a new file name name main.js was created.
+
+The controller will decide what web page will be served to the user. I edited the controller file with the updates in the code shown below.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/220b6ef6-76ac-43e2-88e2-4bb3fda11460)
+
+Next, I edited the index.js file in the routes folder to pass the request for the site default stating page over to the new main controller.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/1cf0e3fa-a2d1-4ddb-a704-6239ef2432cd)
+
+Additionally, I implemented a similar strategy to create a travel page. I added a travel.js file to the controller folder under the app_server folder. I added the below code to the file.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/7d7e4fdc-7e15-4065-afbc-98e92851f104)
+
+This creates a new page called travel. Concordantly, I created a route for the travel page inside the travel.js file. The app.js has to be updated to insert the new app_server folder into the path and add a new route for ‘/travel’.
+
+Creating handlebar views was exciting. I copied the static travel.html to the views folder and renamed the extension to “.hbs” to indicate this will be a Handlebars view. All of the static HTML pages have the same code for a page header and page footer. We can remove redundant code by putting the header and footer layout into a partial.
+
+I created a partials folder inside the views folder. Subsequently, I created a new file called “header.hbs” in the newly created partials folder. I coped the all of the HTML lines for the header and put it inside the new ‘hbs’ file. I did the same thing for the footer. I replaced the code with header and footer enclosed in double brackets ( {{ }} ). To clean up the code, I created a layouts folder under views and moved the layouts.hbs file in there. Lastly, I had to edit the app.js file to register the new partials.
+
