@@ -88,3 +88,64 @@ Creating handlebar views was exciting. I copied the static travel.html to the vi
 
 I created a partials folder inside the views folder. Subsequently, I created a new file called “header.hbs” in the newly created partials folder. I coped the all of the HTML lines for the header and put it inside the new ‘hbs’ file. I did the same thing for the footer. I replaced the code with header and footer enclosed in double brackets ( {{ }} ). To clean up the code, I created a layouts folder under views and moved the layouts.hbs file in there. Lastly, I had to edit the app.js file to register the new partials.
 
+Module 3: Static HTML to Templates With JSON
+
+The first part of Module 3 covers replacing the hard coded HTML trip content with JSON data and a loop using Handlebars directives to render each trip. I created a new top-level folder named ‘data’. Additionally, a new JSON file named ‘trips.json’ with inserted inside the data folder. The instructions stated to copy the static content into the newly created trips JSON file. This encompassed adding three dictionaries inside a list. Each dictionary contained three key/value pairs (name, image, description).
+
+Now, we have to instruct the travel.js controller to use the built-in Node file system. Add the below code to the beginning of the travel.js in the controller folder.
+
+var fs = require(‘fs’);
+
+var trips = JSON.parse(fs.readFileSync(‘./data/trips.json’, ‘utf8’));
+
+Afterwards, add the trips variable as an argument in the render call. I was surprised to discover how an HTML/Handlebars iterates over a JSON file. Remove all but one of the list attributes for the trips in the travel.hbs file. The remaining list uses the ‘this’ operator with dot notation. Replace the image, name, and description fields with the keys from the JSON file. Express will use ‘each’ to iterate over the JSON file and insert the values for each trip.
+
+Module 4: NoSQL Databases, Models, and Schemas
+
+We began module 4 with importing Mongoose to create database schemas. In PowerShell, type and execute the below code:
+
+npm install mongoose
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/5e594437-6256-4495-accc-10e2e6d76a0d)
+
+I created a new folder ‘model’ under the top-level directory app_server. A file name ‘tralr.js’ is located inside the model folder and contains the layout/structure of the database schema. Unfortunately, the database schema structure has to be hard coded in.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/2b2116ab-ccb9-4daf-81ea-c457b3699586)
+
+To interact with the database, we need some additional code. Open up a new tab and search for Simon Holmes getting-MEAN-2. Navigate to the chapter 5 branch, app_server, model, there is a db.js file. It contains the code for interacting with a database. Create a new file ‘db.js’ under the model folder. Copy and paste the code from the GitHub db.js file into the model db.js file. Change line 3 and 57 to:
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/9db91d9b-73ba-455d-a9f8-13ed221bc6b4)
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/1afa71c3-cccf-4e5e-9ea2-8a279fd9c55c)
+
+Seeding a database
+
+You can seed a database by hand, but it is error prone. Create a new file in the top level directory travlr named ‘.seedgooserc.js’.
+
+Copy the boiler plate code into the seedgoose.js file. And make the following changes
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/85962631-30ac-47e7-894e-bf2bfc3cd7a2)
+
+In node_modules -> seedgoose -> lib -> genericSeed.js, insert ‘new’ in front of mongoose.Types.ObjectId() on line 119.
+
+Afterwards, run:
+
+.\node_modules\.bin\seedgoose seed
+
+To update a schema or update on conflict run:
+
+.\node_modules\.bin\seedgoose reseed
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/8f2e9c4b-59d8-4725-8702-7cd3376483b7)
+
+Open up MongoDB Compass. The default local host will be in the dialog box. Click on connect. You will see travlr in the file tree on the left side. Click on travlr and you will see the trips schema. Click on it to view the attributes below:
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/03aac78f-2ab7-41b8-be89-bc1a11c32f3a)
+
+
+
+
+
+
+
+
