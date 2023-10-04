@@ -142,10 +142,73 @@ Open up MongoDB Compass. The default local host will be in the dialog box. Click
 
 ![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/03aac78f-2ab7-41b8-be89-bc1a11c32f3a)
 
+Module 5
 
+Refactor the express code to retrieve information from a database. It will provide access for an Angular front end as well as an Express backend. The logic for access data is exposed as a /app route. Begin by opening PowerShell with a module five branch.
 
+In visual studio, we created a new top-level folder called app_api. This is where the application logic for the api will live. Then we created sub folders named controllers and routes. Take the models folder and move it to the app_api folder. In the controller folder, we created another trips.js file. Line 4 is needed or an error will be thrown.
 
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/9a82c520-13e6-4337-bd7a-6e1445028dd8)
 
+The video does not cover the additional code needed to query the database for a record using the trip code until towards the end. The method is similar to the find function with an additional parameter. Instead of using an empty filter, we pass in a key/value pair snuggled in curly braces. The code is displayed below.
 
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/280d94d2-4a6f-4f4b-8957-53ef88744eea)
 
+To use the newly created trips.js file, we need to set up a route. In the routes folder, create a new file called index.js. Inside the route, take a request for trips and pass it to the controller. The route may have multiple controllers. The code is display and commented.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/acce219a-4ba2-423f-b37c-891bdd186cfb)
+
+Modify the app_js file. Add the three lines of code:
+
+require(‘./app_api/models/db’);
+
+const apiRouter = require(‘./app_api/routes/indes’);
+
+app.use(‘/api’, apiRouter);
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/4673ad07-a629-4c30-9d3d-b3297157d4fa)
+
+The above shows that I was able to successfully move the model data from the app_server folder to the app_api folder. The web page displays information retrieved from API database. The tutorial recommends downloading postman to check API endpoints and request.
+
+I navigated to the postman download page:
+
+https://www.postman.com/downloads/ 
+
+and clicked download. The postman application and shortcut were created. I chose not to install the full version and clicked on the lightweight editor.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/0416b114-a3b2-4f63-bd8e-015747098635)
+
+The above picture shows that I am successfully able to make a get request to an API endpoint that returns JSON data from a MongoDB database. For further testing, we added another router to the index.js file under the router folder in the app_api. The new index.js file is shown below:
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/10c716ad-1a76-4ce6-b275-1edb45d94851)
+
+Adding the unique code for the trip will return the below in postman:
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/b0ab3dea-d550-44f1-a9ce-9b9d41ccf4a9)
+
+Lastly, navigate over to seedgooserc and replace the mode base directory to:
+
+app_api/models
+
+The change is displayed below.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/32616b2d-bb7e-49f3-8388-0f1287598d22)
+
+Continuation
+
+Now that we have the API set up, we have to refactor the back-end server and controller. To do so run the following scripts:
+
+install npm request
+
+This allows the application to make HTTP request from within the JavaScript code. App_server folder is the application back-end. Replace the code in the travel.js file in the controller folder with the code shown below.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/11654e40-3694-4f77-aded-e9589afc6eea)
+
+Currently, running the application displays the travel.hbs but does not show the information from the database. I will continue to investigate this phenomenon. Update: when I made the GET request for the trips, I was passing it to the handle bar in the wrong format. The autocorrect will put JOSON instead of JSON. Luckily, I was able to output data earlier in the program.
+
+The file is shown below. Line 57 was the culprit.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/d710443a-edec-459a-935a-203bb2870aa8)
+
+I changed hyper link reference of the image to serve a web page that displays the trips information for more testing.
 
