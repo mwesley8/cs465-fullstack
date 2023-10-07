@@ -3,10 +3,10 @@
 
 
 // Object instance of the built in Node file system
-//var fs = require('fs');
+var fs = require('fs');
 
 // Parse the newly created JSON file with resusable static content
-//var trips = JSON.parse(fs.readFileSync('./data/trips.json', 'utf8'));
+var title = JSON.parse(fs.readFileSync('./data/title.json', 'utf8'));
 
 const request = require('request');
 const apiOptions = {
@@ -16,7 +16,7 @@ const apiOptions = {
 /* internal method to render the travel list */
 const renderTravelList = (req, res, responseBody) => {
     let message = null;
-    let pageTitle = process.env.npm_package_description + ' - Travel';
+    //let pageTitle = process.env.npm_package_description + ' - Travel';
     if (!(responseBody instanceof Array)) {
         // If the message is not an array
         message = 'API lookup error';
@@ -29,15 +29,15 @@ const renderTravelList = (req, res, responseBody) => {
         }
     }
 
-    //var tripInfo = JSON.parse(responseBody);
-    
+    // Declare variable to hold value of key
+    var pageTitle = title['1']['title']
+
     res.render('travel',
         {
-            // Passing the response body from the API
+            // Pass the title to the view
             title: pageTitle,
             // Change trips from the system file
             // Pass the response body from the API
-            //trips: responseBody,
             trips: responseBody,
             message
         }
