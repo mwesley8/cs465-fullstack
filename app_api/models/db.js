@@ -3,6 +3,10 @@ const host = process.env.DB_HOST || '127.0.0.1';
 let dbURI = 'mongodb://127.0.0.1:27017/travlr';
 const readLine = require('readline');
 
+if (process.env.NODE_ENV === 'production') {
+  dbURI = process.env.MONGODB_URI;
+}
+
 //mongoose.set('useUnifiedTopology', true);
 const connect = () => {
   setTimeout(() => mongoose.connect(dbURI, {
@@ -14,11 +18,6 @@ const connect = () => {
     console.log("Database Connected");
   }).catch(error => {console.log(error);
 }))};
-
-//if (process.env.NODE_ENV === 'production') {
-//  dbURI = process.env.MONGODB_URI;
-//}
-//mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose connected to ${dbURI}`);
@@ -60,4 +59,5 @@ process.on('SIGTERM', () => {
 connect();
 
 require('./travlr');
+
 require('./user');

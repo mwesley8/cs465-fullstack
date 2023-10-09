@@ -1,21 +1,25 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const Schema = require('../models/db');
-//const Schema = mongoose.Schema;
+const { response } = require('../../app');
+
 const User = mongoose.model('users');
 
 const register = (req, res) => {
-    //passport.use();
-    if (!req.body.name || !req.body.email || !req.body.password) {
+    
+    console.log(req.body.name);
+
+    if (!req.body.email || !req.body.email || !req.body.password) {
         return res
             .status(400)
             .json({"message": "All fields required"});
     }
-
+    
     const user = new User();
     user.name = req.body.name;
     user.email = req.body.email;
     user.setPassword(req.body.password);
+    
     user.save((err) => {
     //User.register(new User({ email: req.body.email, username: req.body.username }), req.body.password, function (err, user) {
         if (err) {
@@ -27,18 +31,19 @@ const register = (req, res) => {
             res
                 .status(200)
                 .json({token})
-                .redirect('/login');
+                //.redirect('/login');
         }
     })
 };
 
 const login = (req, res) => {
     if (!req.body.email || !req.body.password) {
+        console.log(req.body.email);
         return res
             .status(400)
             .json({"message": "All fields required"});
     }
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', {session: false}, (err, user, info) => {
         if (err) {
             return res
                 .status(404)
@@ -46,6 +51,7 @@ const login = (req, res) => {
         }
         if (user) {
             const token = user.generateJwt();
+            
             res
                 .status(200)
                 .json({token});

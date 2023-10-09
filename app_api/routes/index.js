@@ -1,6 +1,17 @@
 var express = require('express');
-
 var router = express.Router();
+// Causes the program to crash: jwt is not a function
+const jwt = require('express-jwt');
+
+// Updated method to call express-jwt
+const { expressjwt: expressJwt } = require('express-jwt');
+
+// Add algorithms options: error will display that it is required
+const auth = expressJwt({
+    secret: process.env.GHETTO_SECRET,
+    algorithms: ['HS256'],
+    userProperty: 'payload'
+});
 
 const ctrAuth = require('../controllers/authentication');
 // Import/use the trips file located in the controllers folder
@@ -22,7 +33,7 @@ router
     .route('/trips')
     // Retrieve the trips list from the tips.js database request
     .get(ctrTrip.tripsList)
-    .post(ctrTrip.tripsAddTrip);
+    .post(auth, ctrTrip.tripsAddTrip);
 
 /* Page and Info. */
 router
@@ -30,7 +41,7 @@ router
     .route('/trips/:tripCode')
     // Retrieve the trip from the tips.js database request
     .get(ctrTrip.tripsFindByCode)
-    .put(ctrTrip.tripsUpdateTrip);
+    .put(auth, ctrTrip.tripsUpdateTrip);
 
 
 

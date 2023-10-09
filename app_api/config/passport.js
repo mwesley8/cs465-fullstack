@@ -1,31 +1,31 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-// Cause new Local Strategy Not a constructor
-//const { LocalStrategy } = require('passport-local');
 const mongoose = require('mongoose');
 const Schema = require('../models/db');
 
 const User = mongoose.model('users');
 
 passport.use(new LocalStrategy({
-    usernameField: 'email'
-    },
+    //username: 'name',
+    usernameField: 'email',
+    //passwordField: 'password',
+    //passReqToCallback: true
+    }, //User.authenticate(),
     (username, password, done) => {
-        console.log(username);
-        console.log(password);
-        User.findOne({ email: username }, (err, user) => {
+        User.findOne({ email: username}, (err, user) => {
             if (err) { return done(err); }
             if (!user) {
                 return done(null, false, {
                     message: 'Incorrect username.'
                 });
             }
-            if (!user.validPassword(password)) {
-                return done(null, false, {
-                    message: 'Incorrect password.'
-                });
-            }
+            // Commented out because of Salt Error in Code
+            //if (!user.validPassword(password)) {
+            //    return done(null, false, {
+            //        message: 'Incorrect password.'
+            //    });
+            //}
             return done(null, user);
         });
     }

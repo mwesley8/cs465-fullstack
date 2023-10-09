@@ -18,10 +18,14 @@ var app = express();
 
 require('./app_api/models/db');
 
-const MongoStore = require('connect-mongo');
+// New Code
 const Connection = require('./app_api/models/db');
-//const SessionStore = new MongoStore({mongooseConnection: Connection, collection: 'session'})
+const mongoose = require('mongoose');
+var MongoStore = require('connect-mongo');
+let dbURI = 'mongodb://127.0.0.1:27017/travlr';
+let dbUL  = 'mongodb://localhost:27017/travlr';
 
+// Let app.js know where the passport is
 require('./app_api/config/passport');
 
 // view engine setup
@@ -46,15 +50,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(express.bodyParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(expressSession({ 
   resave: false,
   saveUninitialized: false,
-  secret: "`1NewHampsh!reCollege0fAccounting@Commerce",
-  //store: MongoStore.create( this.options ),
-  //store: SessionStore.create( options ),
+  secret: process.env.GHETTO_SECRET,// "`1NewHampsh!reCollege0fAccounting@Commerce",
+  store: MongoStore.create( {mongoUrl: dbURI, collection: 'users'} ),
   cookie: {
     sameSite: 'none',
     secure: true
@@ -101,6 +103,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
+//app.listen(3000);
 
 module.exports = app;

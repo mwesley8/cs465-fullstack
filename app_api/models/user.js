@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-//const passportLocalMongoose = require('passport-local-mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -40,9 +41,9 @@ userSchema.methods.generateJwt = function() {
         email: this.email,
         name: this.name,
         exp: parseInt(expiry.getTime() / 1000, 10),
-}, "NewHampsh!reCollege0fAccounting@Commerce"); // DO NOT KEEP YOUR SECRET IN THE CODE!
+}, process.env.GHETTO_SECRET); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 // New from Geeks For Geeks: Does not change or effect the program
-//userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose, {collection: "users"});
 
 mongoose.model('users', userSchema);
