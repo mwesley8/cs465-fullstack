@@ -254,7 +254,7 @@ cd ng serve
 
 At this point we have successfully created an Angular application to support the administrative functionality required to support Travlr Getaways!
 
-Create Trip List Component
+Create Trip Component
 
 We used a type script file under the src/app folder named trips.ts. The file contains some test trip JSON data that is copied from the contents of the tirps.json created earlier in the top-level data folder. I edited the trips file, replaced the ‘[‘ brackets with ‘{‘, and removed the numbered identifiers.
 
@@ -270,7 +270,7 @@ The trip listing component html file needs to have access to the trips array. Th
 
 The app component html will render the trip data.
 
-<h1>{{ title }}</h1>
+"<h1>{{ title }}</h1>"
 
 <app-trip-listing></app-trip-listing>
 
