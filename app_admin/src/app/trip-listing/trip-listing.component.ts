@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 // Replace trips with information from TripDataService and Trip definition
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
+import { AuthenticationService } from '../services/authentication';
 
 // Assign values to the selector, template, and style
 @Component({
@@ -28,7 +29,10 @@ export class TripListingComponent implements OnInit{
   message: string;
   
   // Inject the router instance into the class
-  constructor(private tripDataService: TripDataService, private router: Router) {}
+  constructor(private tripDataService: TripDataService,
+              private router: Router,
+              private authService: AuthenticationService
+              ) {}
 
   private getTrips(): void {
     console.log('Inside TripListingComponent#getTrips');
@@ -44,6 +48,10 @@ export class TripListingComponent implements OnInit{
   // Uses the router to navigate to the add-trip component
   public addTrip(): void {
     this.router.navigate(['add-trip']);
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   ngOnInit(): void {
