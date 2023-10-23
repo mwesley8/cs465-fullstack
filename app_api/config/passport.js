@@ -1,3 +1,4 @@
+// Import libraries, modules, schema, and collection
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -6,6 +7,7 @@ const Schema = require('../models/db');
 
 const User = mongoose.model('users');
 
+// Local Strategy logic to handle expression session authentication
 passport.use(new LocalStrategy({
     //username: 'name',
     usernameField: 'email',
@@ -31,10 +33,12 @@ passport.use(new LocalStrategy({
     }
 ));
 
+// Serializer for express session middleware
 passport.serializeUser(function(user, done){
     done(null, user.id)
 });
 
+// Deserializer for express session middleware
 passport.deserializeUser(function(id, done){
     User.findById(id, function(err, user){
         done(err, user);

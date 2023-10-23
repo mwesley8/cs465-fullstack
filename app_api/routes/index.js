@@ -1,3 +1,4 @@
+// Import libraries and modules
 var express = require('express');
 var router = express.Router();
 // Causes the program to crash: jwt is not a function
@@ -41,6 +42,7 @@ router
     .route('/trips/:tripCode')
     // Retrieve the trip from the tips.js database request
     .get(ctrTrip.tripsFindByCode)
+    // PUT the updated information in the database
     .put(auth, ctrTrip.tripsUpdateTrip);
 
 

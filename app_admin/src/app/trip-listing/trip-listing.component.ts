@@ -34,12 +34,16 @@ export class TripListingComponent implements OnInit{
               private authService: AuthenticationService
               ) {}
 
+  // Private member method to retrieve trips from backend
   private getTrips(): void {
+    // Output to user when inside the trip listing component
     console.log('Inside TripListingComponent#getTrips');
     this.message = 'Searching for Trips';
+    // Logic to retrieve trip listing information
     this.tripDataService
       .getTrips()
         .then(foundTrips => {
+          // Tunary conditional operation to check if API returned a valid response
           this.message = foundTrips.length > 0 ? "" : 'No trips found';
           // Store the returned trips in local class variable
           this.trips = foundTrips;
@@ -50,7 +54,9 @@ export class TripListingComponent implements OnInit{
     this.router.navigate(['add-trip']);
   }
 
+  // Public member method to check user log in status
   public isLoggedIn(): boolean {
+    // Method call to authentication service
     return this.authService.isLoggedIn();
   }
 

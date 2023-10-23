@@ -1,3 +1,4 @@
+// Declare and define local variables
 const mongoose = require('mongoose');
 const host = process.env.DB_HOST || '127.0.0.1';
 let dbURI = 'mongodb://127.0.0.1:27017/travlr';
@@ -55,7 +56,6 @@ process.on('SIGTERM', () => {
   });
 });
 
-// Opening the connection removed the schema is not registered
 connect();
 
 require('./travlr');

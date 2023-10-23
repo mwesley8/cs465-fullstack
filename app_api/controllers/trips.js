@@ -34,8 +34,9 @@ const tripsList = async (req, res) => {
             }
         });
 };
-
+// Post - add a new trip to the database
 const tripsAddTrip = async (req, res) => {
+    // Verify user has authorization to perfrom request
     getUser(req, res,
         (req, res) => {
     Model
@@ -63,7 +64,7 @@ const tripsAddTrip = async (req, res) => {
         });
     })
 }
-
+// Put logic to update a trip in the database
 const tripsUpdateTrip = async (req, res) => {
     getUser(req, res,
         (req, res) => {
@@ -101,7 +102,7 @@ const tripsUpdateTrip = async (req, res) => {
         });
     })
 }
-
+// Logic to retrieve a user from the Mongo Database
 const getUser = (req, res, callback) => {
     //console.log(req.payload.email);
     if (req.payload && req.payload.email) {

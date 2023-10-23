@@ -1,3 +1,4 @@
+// Declare model schema for trip information retrieved from API
 export interface Trip {
     _id: string, // internal MongoDB primary key
     code: string,
