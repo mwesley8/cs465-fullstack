@@ -29,7 +29,8 @@ Next, I copied the images from the traveler folder into the express public folde
 
 According to this week’s lesson, the demonstrated web application does not look correct. There is not any text wrapping, the font is New Times Roman, and the menu is vertical. We looked at the log output and there was a 404-error associated with the inability to find the style sheet. A simple fix was to change to folder name from stylesheets to css. Refreshing the web page shows the below output.
 
-![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/7386cda9-92cf-4bc6-bf47-ecd10dcc8b08)
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/81355fe0-e63d-409c-a61d-e8ebd8b626f7)
+
 
 At this point, I have created a web site, imported static content, and the above shows the content being served on a web page. And the last thing to do for this exercise is to save my work. Running git add will stage any new or updated files. When ready, the following statement will push the files to the repository.
 
@@ -40,6 +41,10 @@ Of course, it did not go the way it was supposed to. Before I could push the fil
 Next, I ran git push to push the files to the repository. There is an error because module 1 does not have an upstream yet. However, git does give the statement to create the upstream.
 
 git push --set-upstream origin module_1
+
+Navigating back to the git hub page, and the below was displayed in my browser.
+
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/db4a05aa-527e-45be-a2f8-1f8e49a44c1e)
 
 Creating a new branch and uploading changes have become second nature and I am looking forward to exploring MEAN full stack development.
 
