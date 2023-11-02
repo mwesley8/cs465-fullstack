@@ -24,7 +24,8 @@ I looked on stack overflow and it appears that I need to change the config file 
 
 Next, I copied the images from the traveler folder into the express public folder, replaces images folder, and inserted the style sheet. Refreshing the web page shows the below output.
 
-![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/229b5e2f-ce98-4263-801e-1d76ae610ba0)
+![image](https://github.com/mwesley8/cs465-fullstack/assets/105822088/9f98edab-2464-4853-a5d1-96c9c2bf368c)
+
 
 According to this week’s lesson, the demonstrated web application does not look correct. There is not any text wrapping, the font is New Times Roman, and the menu is vertical. We looked at the log output and there was a 404-error associated with the inability to find the style sheet. A simple fix was to change to folder name from stylesheets to css. Refreshing the web page shows the below output.
 
